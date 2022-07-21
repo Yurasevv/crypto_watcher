@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserNotifyMapperImpl implements Mapper<UserNotifyDto, User> {
+public class UserNotifyMapper implements Mapper<UserNotifyDto, User> {
 
     @Autowired
     CoinRepo coinRepo;

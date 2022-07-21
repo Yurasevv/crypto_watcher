@@ -2,6 +2,7 @@ package com.idf.cryptowatcher.controller;
 
 import com.idf.cryptowatcher.dto.CoinDto;
 import com.idf.cryptowatcher.service.CoinService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequestMapping("/coins")
 public class CoinController {
 
+    @Autowired
     private CoinService coinService;
 
     @GetMapping

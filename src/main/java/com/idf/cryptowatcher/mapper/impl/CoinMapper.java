@@ -6,7 +6,7 @@ import com.idf.cryptowatcher.mapper.api.Mapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CoinMapperImpl implements Mapper<Coin, CoinDto> {
+public class CoinMapper implements Mapper<Coin, CoinDto> {
 
     @Override
     public CoinDto map(Coin coin) {

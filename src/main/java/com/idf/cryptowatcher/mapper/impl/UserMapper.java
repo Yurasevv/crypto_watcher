@@ -6,7 +6,7 @@ import com.idf.cryptowatcher.mapper.api.Mapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserMapperImpl implements Mapper<User, UserDto> {
+public class UserMapper implements Mapper<User, UserDto> {
 
     @Override
     public UserDto map(User user) {
