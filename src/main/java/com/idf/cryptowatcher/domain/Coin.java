@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
