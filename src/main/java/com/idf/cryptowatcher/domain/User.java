@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Data
@@ -20,4 +21,8 @@ public class User {
     private Long id;
 
     private String username;
+
+    private String cryptoSymbol;
+
+    private BigDecimal cryptoPrice;
 }
