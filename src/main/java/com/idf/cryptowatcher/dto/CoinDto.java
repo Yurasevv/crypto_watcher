@@ -1,5 +1,6 @@
 package com.idf.cryptowatcher.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -13,5 +14,6 @@ public class CoinDto {
 
     private String symbol;
 
+    @JsonProperty("price_usd")
     private BigDecimal price;
 }

@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -23,13 +24,10 @@ public class UserService {
 
     @Autowired
     UserRepo userRepo;
-
     @Autowired
     UserMapper userMapper;
-
     @Autowired
     UserNotifyMapper userNotifyMapper;
-
     @Autowired
     CoinService coinService;
 
@@ -40,7 +38,7 @@ public class UserService {
                 .map(userRepo::save)
                 .map(userMapper::map);
     }
-    public void checkUserPrice() {
+    public List<UserDto> checkUserPrice() {
         List<User> userList = userRepo.findAll();
 
         if (!userList.isEmpty()) {
@@ -57,10 +55,17 @@ public class UserService {
                 if (percentOfUserPrice.abs().compareTo(BigDecimal.valueOf(1)) > 0) {
                     log.warn(String.format("Symbol: %s, Username: %s, price change: %.2f%%",
                             userItem.getCryptoSymbol(), userItem.getUsername(), percentOfUserPrice.abs()));
-                    
+
                 }
             }
         }
+        return null;
+    }
+
+    public List<UserDto> findAllUsers() {
+        return userRepo.findAll().stream()
+                .map(userMapper::map)
+                .collect(Collectors.toList());
     }
 }
 

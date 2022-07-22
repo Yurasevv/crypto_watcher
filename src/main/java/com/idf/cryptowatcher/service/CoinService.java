@@ -45,10 +45,12 @@ public class CoinService {
                 new ParameterizedTypeReference<List<CoinDto>>() {
                 }
         );
+
         List<CoinDto> coinDtoList = responseEntity.getBody();
 
         if (coinDtoList != null) {
-            coinDtoList.forEach(dto -> coinRepo.findById(dto.getId())
+            coinDtoList.forEach(
+            dto -> coinRepo.findById(dto.getId())
                             .map(entity -> coinUpdMapper.map(dto, entity))
                             .map(coin -> coinRepo.updatePrice(dto.getPrice(), dto.getId()))
             );

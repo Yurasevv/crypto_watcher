@@ -12,8 +12,8 @@ public class CoinUpdMapper implements Mapper<CoinDto, Coin>{
     public Coin map(CoinDto dto) {
             Coin coin = new Coin();
             coin.setPrice(dto.getPrice());
-            return coin;
 
+            return coin;
     }
 }
 
