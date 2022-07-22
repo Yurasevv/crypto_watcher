@@ -21,5 +21,5 @@ public class Coin {
 
     private String symbol;
 
-    private BigDecimal priceUsd;
+    private BigDecimal price;
 }

@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 public class CoinUpdMapper implements Mapper<CoinDto, Coin>{
 
     @Override
-    public Coin map(CoinDto object) {
+    public Coin map(CoinDto dto) {
             Coin coin = new Coin();
-
+            coin.setPrice(dto.getPrice());
             return coin;
 
     }

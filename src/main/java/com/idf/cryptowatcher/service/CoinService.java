@@ -2,9 +2,11 @@ package com.idf.cryptowatcher.service;
 
 import com.idf.cryptowatcher.domain.Coin;
 import com.idf.cryptowatcher.dto.CoinDto;
+import com.idf.cryptowatcher.exception.CoinNotFoundException;
 import com.idf.cryptowatcher.mapper.impl.CoinMapper;
 import com.idf.cryptowatcher.mapper.impl.CoinUpdMapper;
 import com.idf.cryptowatcher.repo.CoinRepo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -20,6 +22,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class CoinService {
 
     @Autowired
@@ -31,14 +35,11 @@ public class CoinService {
     @Autowired
     private RestTemplate restTemplate;
 
-
-    private final String URL = "https://api.coinlore.net/api/ticker/";
-
     @Transactional
     public void updateCoins() {
         String ids = "90,80,48543";
         ResponseEntity<List<CoinDto>> responseEntity = restTemplate.exchange(
-                URL + "?id=" + ids,
+                "https://api.coinlore.net/api/ticker/?id=" + ids,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<CoinDto>>() {
@@ -49,7 +50,7 @@ public class CoinService {
         if (coinDtoList != null) {
             coinDtoList.forEach(dto -> coinRepo.findById(dto.getId())
                             .map(entity -> coinUpdMapper.map(dto, entity))
-                            .map(coinDto -> coinRepo.updatePrice(dto.getPrice(), dto.getId()))
+                            .map(coin -> coinRepo.updatePrice(dto.getPrice(), dto.getId()))
             );
         }
     }
@@ -62,7 +63,7 @@ public class CoinService {
 
     public Optional<BigDecimal> findPriceBySymbol(String symbol) {
         return coinRepo.findBySymbol(symbol)
-                .map(Coin::getPriceUsd);
+                .map(Coin::getPrice);
     }
 
 }

@@ -13,13 +13,12 @@ public class UserNotifyMapper implements Mapper<UserNotifyDto, User> {
     @Autowired
     CoinRepo coinRepo;
 
-
     @Override
-    public User map(UserNotifyDto object) {
+    public User map(UserNotifyDto dto) {
         User user = new User();
-        user.setUsername(object.getUsername());
-        user.setCryptoSymbol(object.getCryptoSymbol());
-        user.setCryptoPrice(coinRepo.findBySymbol(object.getCryptoSymbol()).get().getPriceUsd());
+        user.setUsername(dto.getUsername());
+        user.setCryptoSymbol(dto.getCryptoSymbol());
+        user.setCryptoPrice(coinRepo.findBySymbol(dto.getCryptoSymbol()).get().getPrice());
 
         return user;
     }

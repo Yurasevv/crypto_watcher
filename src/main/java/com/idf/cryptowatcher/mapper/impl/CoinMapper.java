@@ -13,7 +13,7 @@ public class CoinMapper implements Mapper<Coin, CoinDto> {
         return new CoinDto (
                 coin.getId(),
                 coin.getSymbol(),
-                coin.getPriceUsd()
+                coin.getPrice()
         );
     }
 }
